@@ -17,14 +17,14 @@ public class LandlordService {
         this.landlordRepository = landlordRepository;
     }
 
-    public List<Landlord > getLandlords() {
+    public List<Landlord> getLandlords() {
         return landlordRepository.findAll();
     }
 
     public void addNewLandlord(Landlord landlord) {
         Optional<Landlord> landlordOptional = landlordRepository.findLandlordByEmail(landlord.getEmail());
         if (landlordOptional.isPresent()) {
-            throw new IllegalStateException("This email is already linked to an account!");
+            throw new IllegalStateException("This landlord_email is already linked to an account!");
         } else {
             landlordRepository.save(landlord);
         }
@@ -41,23 +41,23 @@ public class LandlordService {
     }
 
     @Transactional
-    public void updateLandlord(Long landlordId, String name, String email) {
+    public void updateLandlord(Long landlordId, String landlord_name, String landlord_email) {
         Landlord landlord = landlordRepository.findById(landlordId)
                 .orElseThrow(() -> new IllegalStateException(
                         "Landlord with ID: '" + landlordId + "' does not exist"
                 ));
 
-        if (name != null && name.length() > 0 && !Objects.equals(landlord.getName(),
-                name)) {
-                    landlord.setName(name);
+        if (landlord_name != null && landlord_name.length() > 0 && !Objects.equals(landlord.getName(),
+                landlord_name)) {
+                    landlord.setName(landlord_name);
         }
 
-        if (name != null && name.length() > 0 && !Objects.equals(landlord.getEmail(), email)) {
-            Optional<Landlord> landlordOptional = landlordRepository.findLandlordByEmail(email);
+        if (landlord_email != null && landlord_email.length() > 0 && !Objects.equals(landlord.getEmail(), landlord_email)) {
+            Optional<Landlord> landlordOptional = landlordRepository.findLandlordByEmail(landlord_email);
             if (landlordOptional.isPresent()) {
                 throw new IllegalStateException("Email is already in use");
             }
-            landlord.setEmail(email);
+            landlord.setEmail(landlord_email);
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.Unit8Project.landlord;
 
-
 import javax.persistence.*;
 
 @Entity
@@ -26,17 +25,17 @@ public class Landlord {
     public Landlord() {
     }
 
-    public Landlord(Long id, String name, String email, String add) {
+    public Landlord(Long id, String landlord_name, String landlord_email, String landlord_address) {
         this.id = id;
-        this.name = name;
-        this.email = email;
-        this.add = add;
+        this.landlord_name = landlord_name;
+        this.landlord_email = landlord_email;
+        this.landlord_address = landlord_address;
     }
 
-    public Landlord(String name, String email, String add) {
-        this.name = name;
-        this.email = email;
-        this.add = add;
+    public Landlord(String landlord_name, String landlord_email, String landlord_address) {
+        this.landlord_name = landlord_name;
+        this.landlord_email = landlord_email;
+        this.landlord_address = landlord_address;
     }
 
     public Long getId() {
@@ -48,36 +47,36 @@ public class Landlord {
     }
 
     public String getName() {
-        return name;
+        return landlord_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String landlord_name) {
+        this.landlord_name = landlord_name;
     }
 
     public String getEmail() {
-        return email;
+        return landlord_email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String landlord_email) {
+        this.landlord_email = landlord_email;
     }
 
     public String getAdd() {
-        return add;
+        return landlord_address;
     }
 
-    public void setAdd(String add) {
-        this.add = add;
+    public void setAdd(String landlord_address) {
+        this.landlord_address = landlord_address;
     }
 
     @Override
     public String toString() {
         return "Landlord{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", add='" + add + '\'' +
+                ", landlord_name='" + landlord_name + '\'' +
+                ", landlord_email='" + landlord_email + '\'' +
+                ", landlord_address='" + landlord_address + '\'' +
                 '}';
     }
 }

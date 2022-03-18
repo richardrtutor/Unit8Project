@@ -8,6 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface LandlordRepository extends JpaRepository<Landlord, Long> {
-    @Query("SELECT l FROM Landlord l WHERE l.email = ?1")
+    @Query("SELECT l FROM Landlord l WHERE l.landlord_email = ?1")
     Optional<Landlord> findLandlordByEmail(String email);
+
+    @Query("SELECT l FROM Landlord l WHERE l.id = ?1")
+    Optional<Landlord> findById(String landlord_name);
 }

@@ -6,17 +6,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/landlord")
+@RequestMapping(path = "api/v1/landlords")
 public class LandlordController {
     private final LandlordService landlordService;
 
     @Autowired
     public LandlordController(LandlordService landlordService) {
+
         this.landlordService = landlordService;
     }
 
     @GetMapping
     public List<Landlord> getLandlords() {
+
         return landlordService.getLandlords();
     }
 
@@ -32,8 +34,9 @@ public class LandlordController {
 
     @PutMapping(path = "{landlordId}")
     public void updateLandlord(@PathVariable("landlordId") Long landlordId,
-                               @RequestParam(required = false) String name,
-                               @RequestParam(required = false) String email) {
-        landlordService.updateLandlord(landlordId, name, email);
+                               @RequestParam(required = false) String landlord_name,
+                               @RequestParam(required = false) String landlord_email) {
+        landlordService.updateLandlord(landlordId, landlord_name, landlord_email);
+
     }
 }
