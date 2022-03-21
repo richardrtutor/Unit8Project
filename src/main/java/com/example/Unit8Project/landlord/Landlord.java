@@ -15,12 +15,11 @@ public class Landlord {
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
             generator = "landlord_sequence"
-    )
+    ) private Long id;
 
-    private Long id;
-    private String name;
-    private String email;
-    private String add;
+    private String landlord_name;
+    private String landlord_email;
+    private String landlord_address;
 
     public Landlord() {
     }

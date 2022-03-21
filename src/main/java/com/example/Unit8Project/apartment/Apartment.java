@@ -1,13 +1,15 @@
 package com.example.Unit8Project.apartment;
+
 import com.example.Unit8Project.renter.Renter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.Optional;
 
 @Entity
 @Table
 public class Apartment {
+    
     @Id
     @SequenceGenerator(
             name = "apartment_sequence",
@@ -18,12 +20,13 @@ public class Apartment {
     @GeneratedValue(
             strategy = GenerationType.IDENTITY,
             generator = "apartment_sequence"
-    ) private Long apartment_id;
+    ) private Long id;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "apartments")
-    private Set<Renter> renterSet;
+    @OneToOne
+    private Renter renter;
 
+    private String name;
     private String apartment_address;
     private Integer apartment_cost;
     private Integer apartment_sqft;
@@ -31,29 +34,35 @@ public class Apartment {
     public Apartment() {
     }
 
-    public Apartment(Long apartment_id, String apartment_address, Integer apartment_cost, Integer apartment_sqft) {
-        this.apartment_id = apartment_id;
+    public Apartment(Long id, Renter renter, String name, String apartment_address, Integer apartment_cost, Integer apartment_sqft) {
+        this.id = id;
+        this.renter = renter;
+        this.name = name;
         this.apartment_address = apartment_address;
         this.apartment_cost = apartment_cost;
         this.apartment_sqft = apartment_sqft;
     }
 
-    public Apartment(String apartment_address, Integer apartment_cost, Integer apartment_sqft) {
+    public Apartment(Renter renter, String name, String apartment_address, Integer apartment_cost, Integer apartment_sqft) {
+        this.renter = renter;
+        this.name = name;
         this.apartment_address = apartment_address;
         this.apartment_cost = apartment_cost;
         this.apartment_sqft = apartment_sqft;
     }
 
-    public Set<Renter> getRenterSet() {
-        return this.renterSet;
-    }
+    public String getName() {return name;}
 
-    public Long getId() {
-        return apartment_id;
-    }
+    public void setName(String name) {this.name = name;}
+
+    public Renter getRenter() {return renter;}
+
+    public void setRenter(Renter renter) {this.renter = renter;}
+
+    public Long getId() {return id;}
 
     public void setId(Long apartment_id) {
-        this.apartment_id = apartment_id;
+        this.id = id;
     }
 
     public String getAddress() {
@@ -84,10 +93,14 @@ public class Apartment {
     @Override
     public String toString() {
         return "Apartment{" +
-                "apartment_id=" + apartment_id +
+                "id=" + id +
+                ", renter=" + renter +
+                ", name='" + name + '\'' +
                 ", apartment_address='" + apartment_address + '\'' +
                 ", apartment_cost=" + apartment_cost +
                 ", apartment_sqft=" + apartment_sqft +
                 '}';
     }
+
+
 }

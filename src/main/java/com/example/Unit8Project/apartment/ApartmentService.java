@@ -43,12 +43,17 @@ public class ApartmentService {
     }
 
     @Transactional
-    public void updateApartment(String apartmentAddress, String apartment_address) {
+    public void updateApartment(String apartmentAddress, String apartment_address, String name) {
         Apartment apartment = apartmentRepository.findApartmentByAddress(apartmentAddress).orElseThrow(() -> new IllegalStateException("This apartment does not seem to exist!"));
 
         if (apartment_address != null && apartment_address.length() > 0) {
             apartment.setAddress(apartment_address);
         }
 
+        if (name != null && name.length() > 0) {
+            Renter renter = apartmentRepository.findByName(name).orElseThrow(() -> new IllegalStateException("A renter by this name does not exist!"));
+            apartment.setRenter(renter);
+            apartment.setName(name);
         }
+      }
     }

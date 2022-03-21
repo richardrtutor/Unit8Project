@@ -36,7 +36,8 @@ public class ApartmentController {
     @PutMapping(path = "{apartmentAddress}")
     public void updateApartment
             (@PathVariable("apartmentAddress") String apartmentAddress,
-             @RequestParam(required = false) String apartment_address){
-        apartmentService.updateApartment(apartmentAddress, apartment_address);
+             @RequestParam(required = false) String apartment_address,
+             @RequestParam(required = false) String name) {
+        apartmentService.updateApartment(apartmentAddress, apartment_address, name);
     }
 }

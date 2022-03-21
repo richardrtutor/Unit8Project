@@ -12,9 +12,9 @@ public class ApartmentConfig {
     @Bean
     CommandLineRunner commandLineRunner3(ApartmentRepository repository) {
         return args -> {
-            Apartment one = new Apartment(null, "Rome", 600, 1200);
-            Apartment two = new Apartment(null, "Hoover Dam Snackbar", 800, 1800);
-            Apartment three = new Apartment(null,"5078 someroad county", 650, 800);
+            Apartment one = new Apartment(null, null,"Rome", 600, 1200);
+            Apartment two = new Apartment(null, null, "Hoover Dam Snackbar", 800, 1800);
+            Apartment three = new Apartment(null, null, "5078 someroad county", 650, 800);
             repository.saveAll(
                     List.of(one, two, three)
             );
